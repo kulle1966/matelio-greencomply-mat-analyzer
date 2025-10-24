@@ -1,16 +1,16 @@
 {
-  "name": "matelio-greencomply-material-analyzer-api",
-  "version": "3.0.0",
-  "description": "Matelio GreenComply Material Analyzer API - AI-powered material analysis with environmental impact assessment",
-  "main": "index.js",
-  "scripts": {
-    "start": "func start",
-    "test": "echo \"No tests yet\""
-  },
-  "dependencies": {
-    "@azure/functions": "^4.0.0"
-  },
-  "engines": {
-    "node": ">=18.0.0"
-  }
+    "name":  "matelio-greencomply-material-analyzer-api",
+    "version":  "3.0.0",
+    "description":  "Matelio GreenComply Material Analyzer API - AI-powered material analysis with environmental impact assessment",
+    "main":  "src/app.js",
+    "scripts":  {
+                    "start":  "func start",
+                    "test":  "echo \"No tests yet\""
+                },
+    "dependencies":  {
+                         "@azure/functions":  "^4.0.0"
+                     },
+    "engines":  {
+                    "node":  "\u003e=18.0.0"
+                }
 }
