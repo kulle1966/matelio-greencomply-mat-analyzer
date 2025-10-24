@@ -1,0 +1,67 @@
+meta {
+  name: Analyze Material - Fahrrad
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/api/analyze-material
+}
+
+headers {
+  Content-Type: application/json
+  Accept: application/json
+}
+
+body:json {
+  {
+    "productName": "Fahrrad"
+  }
+}
+
+tests {
+  test("Status is 200", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+  
+  test("Response indicates success", function() {
+    const data = res.getBody();
+    expect(data.success).to.equal(true);
+  });
+  
+  test("Product name is echoed back", function() {
+    const data = res.getBody();
+    expect(data.productName).to.equal("Fahrrad");
+  });
+  
+  test("Analysis contains components", function() {
+    const data = res.getBody();
+    expect(data.analysis.components).to.be.an("array");
+    expect(data.analysis.components.length).to.be.greaterThan(0);
+  });
+  
+  test("Components have required fields", function() {
+    const data = res.getBody();
+    const component = data.analysis.components[0];
+    expect(component.component).to.be.a("string");
+    expect(component.materials).to.be.an("array");
+    expect(component.weight).to.be.a("number");
+    expect(component.percentage).to.be.a("number");
+    expect(component.description).to.be.a("string");
+  });
+  
+  test("Summary contains totals", function() {
+    const data = res.getBody();
+    const summary = data.analysis.summary;
+    expect(summary.totalComponents).to.be.a("number");
+    expect(summary.totalWeight).to.be.a("number");
+    expect(summary.uniqueMaterials).to.be.a("number");
+    expect(summary.materials).to.be.an("array");
+  });
+  
+  test("Has metadata", function() {
+    const data = res.getBody();
+    expect(data.metadata.analysisTimestamp).to.be.a("string");
+    expect(data.metadata.version).to.be.a("string");
+  });
+}

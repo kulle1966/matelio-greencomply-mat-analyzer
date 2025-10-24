@@ -1,0 +1,42 @@
+meta {
+  name: Analyze Material - Laptop
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{baseUrl}}/api/analyze-material
+}
+
+headers {
+  Content-Type: application/json
+  Accept: application/json
+}
+
+body:json {
+  {
+    "productName": "Gaming Laptop"
+  }
+}
+
+tests {
+  test("Status is 200", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+  
+  test("Response indicates success", function() {
+    const data = res.getBody();
+    expect(data.success).to.equal(true);
+  });
+  
+  test("Product name is echoed back", function() {
+    const data = res.getBody();
+    expect(data.productName).to.equal("Gaming Laptop");
+  });
+  
+  test("Analysis contains components", function() {
+    const data = res.getBody();
+    expect(data.analysis.components).to.be.an("array");
+    expect(data.analysis.components.length).to.be.greaterThan(0);
+  });
+}

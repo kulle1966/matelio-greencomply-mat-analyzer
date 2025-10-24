@@ -1,0 +1,38 @@
+meta {
+  name: Health Check
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/api/health
+}
+
+headers {
+  Accept: application/json
+}
+
+tests {
+  test("Status is 200", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+  
+  test("Response is JSON", function() {
+    expect(res.getHeader('content-type')).to.contain('application/json');
+  });
+  
+  test("Status is healthy", function() {
+    const data = res.getBody();
+    expect(data.status).to.equal('healthy');
+  });
+  
+  test("Service name is correct", function() {
+    const data = res.getBody();
+    expect(data.service).to.equal('Matelio Material Analyzer API');
+  });
+  
+  test("Has version", function() {
+    const data = res.getBody();
+    expect(data.version).to.exist;
+  });
+}

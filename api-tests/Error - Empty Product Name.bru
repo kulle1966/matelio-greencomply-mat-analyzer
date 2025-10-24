@@ -1,0 +1,36 @@
+meta {
+  name: Error - Empty Product Name
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{baseUrl}}/api/analyze-material
+}
+
+headers {
+  Content-Type: application/json
+  Accept: application/json
+}
+
+body:json {
+  {
+    "productName": ""
+  }
+}
+
+tests {
+  test("Status is 400", function() {
+    expect(res.getStatus()).to.equal(400);
+  });
+  
+  test("Response indicates failure", function() {
+    const data = res.getBody();
+    expect(data.success).to.equal(false);
+  });
+  
+  test("Has error message", function() {
+    const data = res.getBody();
+    expect(data.error).to.be.a("string");
+  });
+}

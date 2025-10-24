@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matelio GreenComply Material Analyzer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌿 Matelio GreenComply Material Analyzer</h1>
+            <p>KI-gestützte Materialanalyse mit Umwelt- und Nachhaltigkeitsbewertung</p>
+        </header>
+
+        <main>
+            <div class="input-section">
+                <h2>Produkt analysieren</h2>
+                <div class="input-group">
+                    <input 
+                        type="text" 
+                        id="productName" 
+                        placeholder="z.B. Fahrrad, Laptop, Smartphone..."
+                        autocomplete="off"
+                    />
+                    <button id="analyzeBtn" onclick="analyzeProduct()">
+                        Analysieren
+                    </button>
+                </div>
+                <div class="quick-examples">
+                    <span>Beispiele:</span>
+                    <button class="example-btn" onclick="setExample('City-Fahrrad 15kg')">Fahrrad</button>
+                    <button class="example-btn" onclick="setExample('Gaming Laptop')">Laptop</button>
+                    <button class="example-btn" onclick="setExample('Smartphone')">Smartphone</button>
+                </div>
+            </div>
+
+            <div id="loading" class="loading hidden">
+                <div class="spinner"></div>
+                <p>Analyse läuft...</p>
+            </div>
+
+            <div id="error" class="error hidden"></div>
+
+            <div id="results" class="results hidden">
+                <h2>Analyseergebnis</h2>
+                <div id="productTitle"></div>
+                
+                <div class="summary">
+                    <h3>Zusammenfassung</h3>
+                    <div id="summaryContent"></div>
+                </div>
+
+                <div class="components">
+                    <h3>Komponenten</h3>
+                    <div id="componentsContent"></div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Powered by Azure OpenAI | Version 2.0</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
