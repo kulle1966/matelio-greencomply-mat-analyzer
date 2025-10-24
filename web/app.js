@@ -1,7 +1,7 @@
 // API Configuration
 const API_URL = (window.location.hostname === 'localhost' || window.location.protocol === 'file:')
     ? 'http://localhost:7071/api' 
-    : '/api'; // Für Azure Static Web App mit API
+    : 'https://matelio-greencomply-api.azurewebsites.net/api'; // Azure Function App URL
 
 // Elements
 const productInput = document.getElementById('productName');
